@@ -10,7 +10,7 @@
 // going to add the screenshot.
 
 // Options
-var makeThumbnails = false;
+var makeThumbnails = true;
 var thumbnailWidth = 120;
 
 var includeStatusBar = false;
@@ -23,7 +23,6 @@ var thumbnailFormat = ".png";
 var jpegQuality = 90;
 
 // Resource Locations
-//var ipadPSD = "/Users/mactop/code/psds/Templates/iPad_Vert_sRGB_0810.acorn";
 var iPad2VerticalPSD = "iPad_2_Vt.acorn";
 var iPad2HorizontalPSD = "iPad_2_Hz.acorn";
 var iPhone4VerticalPSD = "iPhone_4_Vt.acorn";
@@ -66,6 +65,8 @@ if (screenshot != null && resourcesDirectory != null) {
   tmpDoc.close();
 
 
+  var scaleDown = false;
+
   var doc = null;
   switch(size.width) {
     case 768:
@@ -74,40 +75,57 @@ if (screenshot != null && resourcesDirectory != null) {
     case 1024:
       doc = acorn.open(resourcesDirectory + iPad2HorizontalPSD);
       break;
-    case 640:
+    case 320:
       doc = acorn.open(resourcesDirectory + iPhone4VerticalPSD);
       break;
+    case 640:
+      scaleDown = true;
+      doc = acorn.open(resourcesDirectory + iPhone4VerticalPSD);
+      break;
+    case 480:
+      doc = acorn.open(resourcesDirectory + iPhone4HorizontalPSD);
+      break;
     case 960:
+      scaleDown = true;
       doc = acorn.open(resourcesDirectory + iPhone4HorizontalPSD);
       break;
     default:
-      print("Unknown width" + size.width);
+      print("Unsupported width (" + size.width + "px) for " + screenshot);
   }
 
+  if (doc != null) {
+    // Insert screenshot behind gloss
+    var screenshotLayer = doc.baseGroup().insertLayerWithImagePath_atIndex(screenshot, 1);
 
-  // Insert screenshot behind gloss
-  var screenshotLayer = doc.baseGroup().insertLayerWithImagePath_atIndex(screenshot, 1);
+    if (scaleDown) {
+      // Halve layer dimensions to account for a retina iPhone image
+      [screenshotLayer scaleXBy:0.5 yBy:0.5];
+    }
 
-  // Center screenshot
-  var canvasWidth = doc.canvasSize().width;
-  var canvasHeight = doc.canvasSize().height;
+    // Center screenshot
+    var canvasWidth = doc.canvasSize().width;
+    var canvasHeight = doc.canvasSize().height;
 
-  var imageWidth = screenshotLayer.size().width;
-  var imageHeight = screenshotLayer.size().height;
+    var imageWidth = screenshotLayer.size().width;
+    var imageHeight = screenshotLayer.size().height;
 
-  var newImageX = (canvasWidth - imageWidth) / 2;
-  var newImageY = (canvasHeight - imageHeight) / 2;
+    var newImageX = (canvasWidth - imageWidth) / 2;
+    var newImageY = (canvasHeight - imageHeight) / 2;
 
-  screenshotLayer.setFrameOrigin(NSMakePoint(newImageX, newImageY));
-  
-  // Export the full size images
-  doc.webExportWithOptions({'uti': 'public'+fullFormat, 'quality': jpegQuality, 'file': outputFile});
+    screenshotLayer.setFrameOrigin(NSMakePoint(newImageX, newImageY));
 
-  doc.scaleImageToWidth(thumbnailWidth);
-  // Export the thumbnails
-  doc.webExportWithOptions({'uti': 'public'+thumbnailFormat, 'file': smallOutputFile});
+    // Export the full size images
+    doc.webExportWithOptions({'uti': 'public'+fullFormat, 'quality': jpegQuality, 'file': outputFile});
 
-  doc.close();
+    if (makeThumbnails) {
+      // Scale then export the thumbnails
+      doc.scaleImageToWidth(thumbnailWidth);
+      doc.webExportWithOptions({'uti': 'public'+thumbnailFormat, 'file': smallOutputFile});
+    }
+
+    doc.close();
+  }
+
 } else {
   print("Please provide the screenshot and resources directory");
 }

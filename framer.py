@@ -16,6 +16,8 @@ from subprocess import call
 jstalk = "jstalk"
 framerJS = "framer.jstalk"
 outputFolderName = "framed"
+imageExtensions = ('*.jpg', '*.jpeg', '*.png')
+#imageExtensions = ('*.png', '*.jpg', '*.jpeg')
 script_folder = os.path.dirname(os.path.abspath(__file__))
 resources_directory = os.path.join(script_folder, "resources/")
 
@@ -43,13 +45,15 @@ def process_directory(directory):
       print "framed folder created"
       os.makedirs(outputFolder)
     
+    filesProcessed = 0
 
-    pngFiles = glob.glob(directory + '*.png')
+    for imageExtension in imageExtensions:
+      imageFiles = glob.glob(directory + imageExtension)
+      for imageFile in imageFiles:
+        call([jstalk, framerJS, imageFile, resources_directory])
+      filesProcessed += len(imageFiles)
 
-    for pngFile in pngFiles:
-      call([jstalk, framerJS, pngFile, resources_directory])
-
-    print "Framed %d images!" % len(pngFiles)
+    print "Framed %d images!" % filesProcessed
 
 if __name__ == '__main__':
   args = parse_commandline_arguments()
