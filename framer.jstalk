@@ -10,19 +10,27 @@
 // going to add the screenshot.
 
 // Options
-var includeStatusBar = false;
 var makeThumbnails = false;
-
-// Thumbnail Dimensions
 var thumbnailWidth = 120;
 
-// Constants
-var ipadPSD = "/Users/mactop/code/psds/Templates/iPad_Vert_sRGB_0810.acorn";
-var outputFolder = "framed";
-var outputExtension = ".jpeg";
-var smallOutputExtension = ".png";
+var includeStatusBar = false;
+
 var suffix = "SS";
 var smallSuffix = "_thumb";
+var fullFormat = ".jpeg";
+var thumbnailFormat = ".png";
+
+var jpegQuality = 90;
+
+// Resource Locations
+//var ipadPSD = "/Users/mactop/code/psds/Templates/iPad_Vert_sRGB_0810.acorn";
+var iPad2VerticalPSD = "iPad_2_Vt.acorn";
+var iPad2HorizontalPSD = "iPad_2_Hz.acorn";
+var iPhone4VerticalPSD = "iPhone_4_Vt.acorn";
+var iPhone4HorizontalPSD = "iPhone_4_Hz.acorn";
+
+// Constants
+var outputFolder = "framed";
 
 
 // Argument Processing
@@ -30,12 +38,14 @@ var pi       = NSProcessInfo.processInfo();
 var argCount = pi.arguments().count();
 
 var screenshot = null;
+var resourcesDirectory = null;
 
 if (pi.arguments().length() > 1) {
  screenshot = pi.arguments()[2];
+ resourcesDirectory = pi.arguments()[3];
 }
 
-if (screenshot != null) {
+if (screenshot != null && resourcesDirectory != null) {
 
   // Create output file name
   var splitFile = /^(.*)\.(.*)$/.exec(screenshot);
@@ -44,15 +54,39 @@ if (screenshot != null) {
   var filename = file.split("/").pop();
   var directory = file.substring(0, file.lastIndexOf("/")+1);
   var outputDirectory = directory + outputFolder;
-  var outputFile = outputDirectory + "/" + filename + suffix + outputExtension;
-  var smallOutputFile = outputDirectory + "/" + filename + suffix + smallSuffix + smallOutputExtension;
+  var outputFile = outputDirectory + "/" + filename + suffix + fullFormat;
+  var smallOutputFile = outputDirectory + "/" + filename + suffix + smallSuffix + thumbnailFormat;
 
   // Open iPad template
   var acorn = JSTalk.application("Acorn");
-  var doc = acorn.open(ipadPSD);
 
-  // Insert screenshot
-  var screenshotLayer = doc.baseGroup().insertLayerWithImagePath_atIndex(screenshot, 0);
+
+  var tmpDoc = acorn.open(screenshot);
+  var size = tmpDoc.canvasSize();
+  tmpDoc.close();
+
+
+  var doc = null;
+  switch(size.width) {
+    case 768:
+      doc = acorn.open(resourcesDirectory + iPad2VerticalPSD);
+      break;
+    case 1024:
+      doc = acorn.open(resourcesDirectory + iPad2HorizontalPSD);
+      break;
+    case 640:
+      doc = acorn.open(resourcesDirectory + iPhone4VerticalPSD);
+      break;
+    case 960:
+      doc = acorn.open(resourcesDirectory + iPhone4HorizontalPSD);
+      break;
+    default:
+      print("Unknown width" + size.width);
+  }
+
+
+  // Insert screenshot behind gloss
+  var screenshotLayer = doc.baseGroup().insertLayerWithImagePath_atIndex(screenshot, 1);
 
   // Center screenshot
   var canvasWidth = doc.canvasSize().width;
@@ -66,15 +100,15 @@ if (screenshot != null) {
 
   screenshotLayer.setFrameOrigin(NSMakePoint(newImageX, newImageY));
   
-  // Export the image as a PNG
-  doc.webExportWithOptions({'uti': 'public'+outputExtension, 'quality': 90, 'file': outputFile});
+  // Export the full size images
+  doc.webExportWithOptions({'uti': 'public'+fullFormat, 'quality': jpegQuality, 'file': outputFile});
 
   doc.scaleImageToWidth(thumbnailWidth);
-  doc.webExportWithOptions({'uti': 'public'+smallOutputExtension, 'file': smallOutputFile});
-  doc.undo();
+  // Export the thumbnails
+  doc.webExportWithOptions({'uti': 'public'+thumbnailFormat, 'file': smallOutputFile});
 
   doc.close();
 } else {
-  print("Please provide the screenshot to be used as an argument");
+  print("Please provide the screenshot and resources directory");
 }
 

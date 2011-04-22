@@ -1,12 +1,15 @@
-h1. Before you start
+h1. Required Downloads
 
-Make sure you go to the Apple marketing site and complete the App Marketing
-License Agreement.
+h2. JSTalk
 
-http://developer.apple.com/appstore/resources/marketing/
-https://developer.apple.com/appstore/AppStoreMarketingLicense.pdf
+JSTalk is required to automate Acorn. You can download it from the JSTalk website.
 
-h2. Resources to Download
+Note: Be sure that the <pre>jstalk</pre> application is in your path. I put
+mine in /usr/local/bin/
+
+http://jstalk.org/
+
+h2. Source PSDs
 
 h3. For iPad
 
@@ -36,7 +39,30 @@ them. The framed images will be placed in an output folder titled <em>framed</em
 
 h2. Apple Resources Note
 
+Make sure you go to the Apple marketing site and complete the App Marketing
+License Agreement.
+
+http://developer.apple.com/appstore/resources/marketing/
+https://developer.apple.com/appstore/AppStoreMarketingLicense.pdf
+
 These iPad and iPhone resources are only allowed to be used on your website if
 you comply with the App Marketing and Identity Guidelines for Developers.
 
 https://developer.apple.com/appstore/AppStoreMarketingGuidelines.pdf
+
+h1. Special Thanks To
+
+iPad 2 PSD
+http://maxdicapua.tumblr.com/post/3619140813
+
+h1. Bugs
+
+
+Quality can not be scripted for web export currently. Instead the quality will
+be set to whatever the quality was last set to in Acorn. Open Web Export in
+Acorn through File -> Web Export to change your quality settings. The creator
+of Acorn is aware of this and has notified me it will be fixed in Acorn 3.0.1.
+
+http://twitter.com/#!/ccgus/status/59799046776299521
+
+
