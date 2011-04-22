@@ -1,0 +1,68 @@
+// framer.jstalk
+
+// Author: Jeremy Mack
+// Code Website: TODO
+// Company: Pile of Turtles, LLC
+// Company Website: http://pileofturtles.com
+
+// Acorn script that opens a target screenshot and applies the iPad frame It
+// accepts one argument, which is the location of the PNG file to which it is
+// going to add the screenshot.
+
+var ipadPSD = "/Users/mactop/code/psds/Templates/iPad_Vert_sRGB_0810.acorn";
+var outputFolder = "output";
+var outputExtension = ".jpeg";
+var smallOutputExtension = ".png";
+
+var pi       = NSProcessInfo.processInfo();
+var argCount = pi.arguments().count();
+
+var screenshot = null;
+
+if (pi.arguments().length() > 1) {
+ screenshot = pi.arguments()[2];
+}
+
+if (screenshot != null) {
+
+  // Create output file name
+  var splitFile = /^(.*)\.(.*)$/.exec(screenshot);
+  var file = splitFile[1];
+  var extension = splitFile[2];
+  var filename = file.split("/").pop();
+  var directory = file.substring(0, file.lastIndexOf("/")+1);
+  var outputDirectory = directory + "output";
+  var outputFile = outputDirectory + "/" + filename + "SS" + outputExtension;
+  var smallOutputFile = outputDirectory + "/" + filename + "SSsmall" + smallOutputExtension;
+
+  // Open iPad template
+  var acorn = JSTalk.application("Acorn");
+  var doc = acorn.open(ipadPSD);
+
+  // Insert screenshot
+  var screenshotLayer = doc.baseGroup().insertLayerWithImagePath_atIndex(screenshot, 0);
+
+  // Center screenshot
+  var canvasWidth = doc.canvasSize().width;
+  var canvasHeight = doc.canvasSize().height;
+
+  var imageWidth = screenshotLayer.size().width;
+  var imageHeight = screenshotLayer.size().height;
+
+  var newImageX = (canvasWidth - imageWidth) / 2;
+  var newImageY = (canvasHeight - imageHeight) / 2;
+
+  screenshotLayer.setFrameOrigin(NSMakePoint(newImageX, newImageY));
+  
+  // Export the image as a PNG
+  doc.webExportWithOptions({'uti': 'public'+outputExtension, 'quality': 90, 'file': outputFile});
+
+  doc.scaleImageToWidth(120);
+  doc.webExportWithOptions({'uti': 'public'+smallOutputExtension, 'file': smallOutputFile});
+  doc.undo();
+
+  doc.close();
+} else {
+  print("Please provide the screenshot to be used as an argument");
+}
+
