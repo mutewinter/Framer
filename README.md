@@ -1,6 +1,8 @@
-# Required Downloads
+# Framer
 
-## JSTalk
+## Required Downloads
+
+### JSTalk
 
 [JSTalk][jstalk] is required to automate Acorn. You can download it from the JSTalk website.
 
@@ -9,7 +11,7 @@ mine in /usr/local/bin/
 
 [jstalk]:http://jstalk.org/
 
-# Usage
+## Usage
 
 <code>
   python framer.py DIRECTORY
@@ -26,7 +28,7 @@ License Agreement][license].
 [marketing]:http://developer.apple.com/appstore/resources/marketing/
 [license]:https://developer.apple.com/appstore/AppStoreMarketingLicense.pdf
 
-# Special Thanks To
+## Special Thanks To
 
 Max Di Capua - [iPad 2 PSD][max]
 [max]:http://maxdicapua.tumblr.com/post/3619140813
@@ -34,7 +36,7 @@ Max Di Capua - [iPad 2 PSD][max]
 teehan+lax - [iPhone 4 PSD][tl]
 [tl]:http://www.teehanlax.com/blog/2010/06/14/iphone-gui-psd-v4/
 
-# Bugs
+## Bugs
 
 Quality can not be scripted for web export currently. Instead the quality will
 be set to whatever the quality was last set to in Acorn. Open Web Export in
