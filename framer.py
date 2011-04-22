@@ -15,6 +15,9 @@ import os
 import lib.argparse as argparse
 from subprocess import call
 
+jstalk = "jstalk"
+framerJS = "framer.jstalk"
+outputFolderName = "framed"
 
 def parse_commandline_arguments():
   parser = argparse.ArgumentParser(description=
@@ -32,10 +35,6 @@ def parse_commandline_arguments():
   return parser.parse_args()
   
 
-jstalk = "jstalk"
-framerJS = "framer.jstalk"
-outputFolderName = "output"
-
 
 def process_directory(directory):
   if directory:
@@ -49,6 +48,9 @@ def process_directory(directory):
 
     for pngFile in glob.glob(directory + '*.png'):
       call([jstalk, framerJS, pngFile])
+
+    print "Parsing complete, files saved in:"
+    print outputFolder
 
 if __name__ == '__main__':
   args = parse_commandline_arguments()

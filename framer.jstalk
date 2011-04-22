@@ -9,11 +9,23 @@
 // accepts one argument, which is the location of the PNG file to which it is
 // going to add the screenshot.
 
+// Options
+var includeStatusBar = false;
+var makeThumbnails = false;
+
+// Thumbnail Dimensions
+var thumbnailWidth = 120;
+
+// Constants
 var ipadPSD = "/Users/mactop/code/psds/Templates/iPad_Vert_sRGB_0810.acorn";
-var outputFolder = "output";
+var outputFolder = "framed";
 var outputExtension = ".jpeg";
 var smallOutputExtension = ".png";
+var suffix = "SS";
+var smallSuffix = "_thumb";
 
+
+// Argument Processing
 var pi       = NSProcessInfo.processInfo();
 var argCount = pi.arguments().count();
 
@@ -31,9 +43,9 @@ if (screenshot != null) {
   var extension = splitFile[2];
   var filename = file.split("/").pop();
   var directory = file.substring(0, file.lastIndexOf("/")+1);
-  var outputDirectory = directory + "output";
-  var outputFile = outputDirectory + "/" + filename + "SS" + outputExtension;
-  var smallOutputFile = outputDirectory + "/" + filename + "SSsmall" + smallOutputExtension;
+  var outputDirectory = directory + outputFolder;
+  var outputFile = outputDirectory + "/" + filename + suffix + outputExtension;
+  var smallOutputFile = outputDirectory + "/" + filename + suffix + smallSuffix + smallOutputExtension;
 
   // Open iPad template
   var acorn = JSTalk.application("Acorn");
@@ -57,7 +69,7 @@ if (screenshot != null) {
   // Export the image as a PNG
   doc.webExportWithOptions({'uti': 'public'+outputExtension, 'quality': 90, 'file': outputFile});
 
-  doc.scaleImageToWidth(120);
+  doc.scaleImageToWidth(thumbnailWidth);
   doc.webExportWithOptions({'uti': 'public'+smallOutputExtension, 'file': smallOutputFile});
   doc.undo();
 

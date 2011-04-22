@@ -1,0 +1,42 @@
+h1. Before you start
+
+Make sure you go to the Apple marketing site and complete the App Marketing
+License Agreement.
+
+http://developer.apple.com/appstore/resources/marketing/
+https://developer.apple.com/appstore/AppStoreMarketingLicense.pdf
+
+h2. Resources to Download
+
+h3. For iPad
+
+iPad 2
+(sorry, they don't give out the iPad 1 artwork anymore)
+
+http://devimages.apple.com/appstore/resources/marketing/artwork/iPad_2.zip
+
+h3. For iPhone
+
+iPhone 4
+iPhone 3GS
+iPod touch
+
+http://devimages.apple.com/appstore/resources/marketing/artwork/iPhone_4.zip
+http://devimages.apple.com/appstore/resources/marketing/artwork/iPhone_3GS.zip
+http://devimages.apple.com/appstore/resources/marketing/artwork/iPod_touch.zip
+
+h1. Usage
+
+<pre>
+  python framer.py DIRECTORY
+</pre>
+
+This will parse all of the .png images in the directory you pass and frame
+them. The framed images will be placed in an output folder titled <em>framed</em>.
+
+h2. Apple Resources Note
+
+These iPad and iPhone resources are only allowed to be used on your website if
+you comply with the App Marketing and Identity Guidelines for Developers.
+
+https://developer.apple.com/appstore/AppStoreMarketingGuidelines.pdf
