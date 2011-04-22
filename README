@@ -1,68 +1,46 @@
-h1. Required Downloads
+# Required Downloads
 
-h2. JSTalk
+## JSTalk
 
-JSTalk is required to automate Acorn. You can download it from the JSTalk website.
+[JSTalk][jstalk] is required to automate Acorn. You can download it from the JSTalk website.
 
 Note: Be sure that the <pre>jstalk</pre> application is in your path. I put
 mine in /usr/local/bin/
 
-http://jstalk.org/
+[jstalk]:http://jstalk.org/
 
-h2. Source PSDs
+# Usage
 
-h3. For iPad
-
-iPad 2
-(sorry, they don't give out the iPad 1 artwork anymore)
-
-http://devimages.apple.com/appstore/resources/marketing/artwork/iPad_2.zip
-
-h3. For iPhone
-
-iPhone 4
-iPhone 3GS
-iPod touch
-
-http://devimages.apple.com/appstore/resources/marketing/artwork/iPhone_4.zip
-http://devimages.apple.com/appstore/resources/marketing/artwork/iPhone_3GS.zip
-http://devimages.apple.com/appstore/resources/marketing/artwork/iPod_touch.zip
-
-h1. Usage
-
-<pre>
+<code>
   python framer.py DIRECTORY
-</pre>
+</code>
 
 This will parse all of the .png images in the directory you pass and frame
 them. The framed images will be placed in an output folder titled <em>framed</em>.
 
-h2. Apple Resources Note
+## Apple Resources Note
 
-Make sure you go to the Apple marketing site and complete the App Marketing
-License Agreement.
+Make sure you go to the Apple [marketing site][marketing] and complete the [App Marketing
+License Agreement][license].
 
-http://developer.apple.com/appstore/resources/marketing/
-https://developer.apple.com/appstore/AppStoreMarketingLicense.pdf
+[marketing]:http://developer.apple.com/appstore/resources/marketing/
+[license]:https://developer.apple.com/appstore/AppStoreMarketingLicense.pdf
 
-These iPad and iPhone resources are only allowed to be used on your website if
-you comply with the App Marketing and Identity Guidelines for Developers.
+# Special Thanks To
 
-https://developer.apple.com/appstore/AppStoreMarketingGuidelines.pdf
+Max Di Capua - [iPad 2 PSD][max]
+[max]:http://maxdicapua.tumblr.com/post/3619140813
 
-h1. Special Thanks To
+teehan+lax - [iPhone 4 PSD][tl]
+[tl]:http://www.teehanlax.com/blog/2010/06/14/iphone-gui-psd-v4/
 
-iPad 2 PSD
-http://maxdicapua.tumblr.com/post/3619140813
-
-h1. Bugs
-
+# Bugs
 
 Quality can not be scripted for web export currently. Instead the quality will
 be set to whatever the quality was last set to in Acorn. Open Web Export in
 Acorn through File -> Web Export to change your quality settings. The creator
-of Acorn is aware of this and has notified me it will be fixed in Acorn 3.0.1.
+of Acorn is aware of this and has [notified me][notified] it will be fixed in Acorn 3.0.1.
 
-http://twitter.com/#!/ccgus/status/59799046776299521
+[notified]:http://twitter.com/#!/ccgus/status/59799046776299521
 
 
