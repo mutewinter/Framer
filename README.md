@@ -1,5 +1,7 @@
 # Framer
 
+![It's life-changing!](https://github.com/mutewinter/Framer/raw/master/screenshots/framer_info.jpg)
+
 ## Required Downloads
 
 ### JSTalk
