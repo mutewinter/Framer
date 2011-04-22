@@ -12,7 +12,7 @@
 import glob
 #import sys
 import os
-import argparse
+import lib.argparse as argparse
 from subprocess import call
 
 
@@ -37,20 +37,20 @@ framerJS = "framer.jstalk"
 outputFolderName = "output"
 
 
-def process_folder(folder):
-  if folder:
-    outputFolder = os.path.join(folder, outputFolderName) 
+def process_directory(directory):
+  if directory:
+    outputFolder = os.path.join(directory, outputFolderName) 
     if not os.path.exists(outputFolder):
       print "Created output directory"
       os.makedirs(outputFolder)
     
 
-    print "Parsing images in " + folder
+    print "Parsing images in " + directory
 
-    for pngFile in glob.glob(folder + '*.png'):
+    for pngFile in glob.glob(directory + '*.png'):
       call([jstalk, framerJS, pngFile])
 
 if __name__ == '__main__':
   args = parse_commandline_arguments()
 
-  process_folder(args.directory)
+  process_directory(args.directory[0])
