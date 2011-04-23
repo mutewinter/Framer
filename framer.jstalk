@@ -13,8 +13,6 @@
 var makeThumbnails = true;
 var thumbnailWidth = 120;
 
-var includeStatusBar = false;
-
 var suffix = "SS";
 var smallSuffix = "_thumb";
 var fullFormat = ".jpeg";

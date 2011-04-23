@@ -17,7 +17,8 @@ jstalk = "jstalk"
 framerJS = "framer.jstalk"
 outputFolderName = "framed"
 imageExtensions = ('*.jpg', '*.jpeg', '*.png')
-#imageExtensions = ('*.png', '*.jpg', '*.jpeg')
+
+
 script_folder = os.path.dirname(os.path.abspath(__file__))
 resources_directory = os.path.join(script_folder, "resources/")
 
