@@ -2,6 +2,12 @@
 
 ![It's life-changing!](https://github.com/mutewinter/Framer/raw/master/screenshots/framer_info.jpg)
 
+## Description
+
+For a detailed description of the creation and purpose of Framer, see [my blog post][blog].
+
+[blog]:http://pileofturtles.com/2011/04/framer-an-ios-screenshot-creator/
+
 ## Required Downloads
 
 ### Acorn
