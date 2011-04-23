@@ -4,6 +4,12 @@
 
 ## Required Downloads
 
+### Acorn
+
+You'll need [Acorn][acorn] to run this script. It's worth every penny. Seriously, buy it right now.
+
+[acorn]:http://flyingmeat.com/acorn/
+
 ### JSTalk
 
 [JSTalk][jstalk] is required to automate Acorn. You can download it from the JSTalk website.
@@ -20,7 +26,8 @@ mine in <code>/usr/local/bin/</code>
 </code>
 
 This will parse all of the .png images in the directory you pass and frame
-them. The framed images will be placed in an output folder titled <em>framed</em>.
+them. The framed images will be placed in an output folder titled
+<code>framed</code> (if it doesn't exist it will be created).
 
 ## Apple Resources Note
 
