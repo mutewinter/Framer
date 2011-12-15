@@ -6,6 +6,8 @@
 
 For a detailed description of the creation and purpose of Framer, see [my blog post][blog].
 
+**[GitEgo - GitHub Stats for Framer](http://gitego.com/mutewinter/Framer)**
+
 [blog]:http://pileofturtles.com/2011/04/framer-an-ios-screenshot-creator/
 
 ## Required Downloads
